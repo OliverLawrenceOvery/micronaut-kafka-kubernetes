@@ -8,4 +8,9 @@ mongodb:
 db:
   name: 'food'
   collection: 'food'
+---
+kafka:
+  bootstrap:
+   #servers: host.docker.internal:29092
+    servers: localhost:29092
 

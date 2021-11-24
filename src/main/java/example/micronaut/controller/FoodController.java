@@ -8,6 +8,7 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
+import jakarta.inject.Inject;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
@@ -19,6 +20,7 @@ public class FoodController {
 
     private final FoodService foodService;
 
+    @Inject
     public FoodController(FoodService foodService) {
         this.foodService = foodService;
     }
