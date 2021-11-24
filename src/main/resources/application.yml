@@ -6,6 +6,6 @@ mongodb:
   uri: mongodb://adminuser:password123@${MONGO_HOST:localhost}:${MONGO_PORT:54714}/authSource=auth-source
 ---
 db:
-  name: 'fruit'
-  collection: 'fruit'
+  name: 'food'
+  collection: 'food'
 

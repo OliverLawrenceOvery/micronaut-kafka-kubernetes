@@ -1,6 +1,6 @@
 package example.micronaut.repository;
 
-import example.micronaut.domain.Fruit;
+import example.micronaut.domain.Food;
 import io.micronaut.core.annotation.NonNull;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
@@ -8,9 +8,9 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-public interface FruitRepository {
+public interface FoodRepository {
     @NonNull
-    Publisher<Fruit> list();
+    Publisher<Food> list();
 
-    Mono<Boolean> save(@NonNull @NotNull @Valid Fruit fruit); // <1>
+    Mono<Boolean> save(@NonNull @NotNull @Valid Food fruit);
 }

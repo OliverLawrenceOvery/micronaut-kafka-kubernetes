@@ -2,7 +2,7 @@ package example.micronaut.repository;
 
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoCollection;
-import example.micronaut.domain.Fruit;
+import example.micronaut.domain.Food;
 import example.micronaut.configuration.MongoDbConfiguration;
 import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
@@ -12,34 +12,34 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@Singleton // <1>
-public class MongoDbFruitRepository implements FruitRepository {
+@Singleton
+public class MongoDbFoodRepository implements FoodRepository {
 
     private final MongoDbConfiguration mongoConf;
     private final MongoClient mongoClient;
 
-    public MongoDbFruitRepository(MongoDbConfiguration mongoConf,  // <2>
-                                  MongoClient mongoClient) {  // <3>
+    public MongoDbFoodRepository(MongoDbConfiguration mongoConf,
+                                 MongoClient mongoClient) {
         this.mongoConf = mongoConf;
         this.mongoClient = mongoClient;
     }
 
     @Override
-    public Mono<Boolean> save(@NonNull @NotNull @Valid Fruit fruit){
-        return Mono.from(getCollection().insertOne(fruit)) // <4>
+    public Mono<Boolean> save(@NonNull @NotNull @Valid Food food){
+        return Mono.from(getCollection().insertOne(food))
                 .map(insertOneResult -> Boolean.TRUE)
                 .onErrorReturn(Boolean.FALSE);
     }
 
     @Override
     @NonNull
-    public Publisher<Fruit> list() {
-        return getCollection().find(); // <4>
+    public Publisher<Food> list() {
+        return getCollection().find();
     }
     
     @NonNull
-    private MongoCollection<Fruit> getCollection(){
+    private MongoCollection<Food> getCollection(){
         return mongoClient.getDatabase(mongoConf.getName())
-                .getCollection(mongoConf.getCollection(), Fruit.class);
+                .getCollection(mongoConf.getCollection(), Food.class);
     }
 }

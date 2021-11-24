@@ -9,26 +9,26 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
 
 import javax.validation.constraints.NotBlank;
 
-@Introspected // <1>
-public class Fruit {
+@Introspected
+public class Food {
 
     @NonNull
-    @NotBlank // <2>
-    @BsonProperty("name") // <3>
+    @NotBlank
+    @BsonProperty("name")
     private final String name;
 
     @Nullable
-    @BsonProperty("description") // <3>
+    @BsonProperty("description")
     private String description;
 
-    public Fruit(@NonNull String name) {
+    public Food(@NonNull String name) {
         this(name, null);
     }
 
-    @Creator // <4>
-    @BsonCreator// <3>
-    public Fruit(@NonNull @BsonProperty("name") String name,  // <3>
-                 @Nullable @BsonProperty("description") String description) {  // <3>
+    @Creator
+    @BsonCreator
+    public Food(@NonNull @BsonProperty("name") String name,
+                @Nullable @BsonProperty("description") String description) {
         this.name = name;
         this.description = description;
     }
