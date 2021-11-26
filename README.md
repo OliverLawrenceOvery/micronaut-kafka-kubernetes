@@ -7,6 +7,34 @@ Micronaut application that uses:
 
 ### Pre-requisites
 
+1) Have Docker Desktop and Kubernetes installed locally.
+
+### How to Run
+
+1) Clone this repo
+2) Pull images and create the Kafka and Broker containers by running the following commands:
+   ```
+   cd kafka
+   docker-compose up -d 
+   ```
+3) Deploy the MongoDB resources by running the following command:
+   ```
+   kubectl apply -f mongodb
+   ```
+
+### SonarQube
+
+SonarQube is a static code analysis tool to provide reports on quality of code, with regards to security vulnerabilities, unused imports etc. To deploy locally, run the following command:
+```
+docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+```
+Once running, navigate to http://localhost:9000 and sign-in using "admin:admin"
+
+```
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=the-generated-token```
+```
+
+
 ### MongoDB
 
 Numerous resources are created through the deployment of MongoDB on Kubernetes:
@@ -97,5 +125,7 @@ Numerous resources are created through the deployment of MongoDB on Kubernetes:
       ```
       db.<collection_name>.find()
       ```
-6) 
+6) Mongo access from outside cluster (mongodb-nodeport-svc.yaml)
+   1) Use a service of type 'NodePort' in order to enable a fixed port through which MongoDB can be accessed
+   2) We set the port as 32000, and connect to this in [application.yaml](src/main/resources/application.yml)
       

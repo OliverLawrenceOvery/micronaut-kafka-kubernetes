@@ -1,5 +1,6 @@
 package example.micronaut.kafka;
 
+import example.micronaut.domain.Food;
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Requires;
 import jakarta.inject.Inject;
@@ -22,10 +23,10 @@ public class KafkaProducerService {
         this.kafkaProducer = kafkaProducer;
     }
 
-    public UUID sendMessage(String message) {
+    public UUID sendMessage(Food food) {
         UUID uuid = UUID.randomUUID();
-        log.info("Sending message: " + message + " with id: " + uuid);
-        kafkaProducer.sendMessage(uuid, message);
+        log.info("Sending food item: " + food.getName() + " with id: " + uuid);
+        kafkaProducer.sendMessage(uuid, food);
         return uuid;
     }
 }
